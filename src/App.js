@@ -18,7 +18,7 @@ const Display = ({valor, ...props}) => {
 const Box = () => {
     let n = ["C", "( )", "%", "/", 7, 8, 9, "x", 4, 5, 6, "-", 1, 2, 3, "+", "+/-", 0, ".", "="];
     return n.map((num) => (
-        <div key={num} style={{border: "1px solid", margin: 2, display: "inline-flex", paddingBottom: 10, paddingTop: 10, width: "23.3%", backgroundColor: "lightGray", textAlign: "center"}}>
+        <div key={num} style={{border: "1px solid", margin: 2, display: "inline-flex", paddingBottom: 10, paddingTop: 10, width: "23.3%", backgroundColor: "lightGray", justifyContent: "center"}}>
             <h2>{num}</h2>
         </div>
     ));
