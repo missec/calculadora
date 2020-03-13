@@ -28,7 +28,8 @@ const Box = () => {
 
 const App = () => {
     return (
-        <div style={{width: 390, fontFamily: "sans-serif"}}>
+        <div style={{width: 390, fontFamily: "sans-serif", margin: "7% auto", textAlign: "center"}}>
+            <h1>Calculadora</h1>
             <div style={{padding: 2, border: "1px solid", width: 384}}>
                 <Display valor={10} />
                 <Box />
