@@ -24,7 +24,7 @@ const Display = ({label, ...props}) => {
     // otra forma de asignacion por destructuring en la declaracion
     // de la funcion: const Display = ({label, ...props}) => {
     // let {label, ...rest} = props; //Asignación por destructuring
-    console.log({label});
+    //console.log({label});
     if (typeof label === "undefined") {
         label = 0;
     }
@@ -37,7 +37,7 @@ const Display = ({label, ...props}) => {
 };
 
 const Box = ({callBack}) => {
-    const teclas = ["C", "( )", "%", "/", 7, 8, 9, "x", 4, 5, 6, "-", 1, 2, 3, "+", "+/-", 0, ".", "="];
+    const teclas = ["C", "( )", "%", " / ", 7, 8, 9, " x ", 4, 5, 6, " - ", 1, 2, 3, " + ", "+/-", 0, ".", "="];
 
     return teclas.map((tecla) => (
         <div key={tecla} style={styles.divBox} onClick={() => callBack(tecla)}>
@@ -53,42 +53,68 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            display: "",
+            display: 0,
             previous: null
         };
     }
 
     processar(botao) {
         let {display, previous} = this.state;
+        let operador = [" / ", " x ", " - ", " + "];
 
+        if (botao !== "undefined" && operador.indexOf(botao) !== -1) {
+            console.log(operador.indexOf(botao));
+        }
         switch (botao) {
-            case "+":
+            case " + ":
+                if (previous === "" || previous === "undefined") {
+                    display = "+";
+                }
+                display = "";
+                break;
+            case " - ":
                 previous = display;
                 display = "";
                 break;
-            case "=":
+            case " x ":
+                previous = display;
+                display = "";
+                break;
+            case " / ":
+                previous = display;
+                display = "";
+                break;
+            case " = ":
                 display = parseInt(display);
                 break;
             default:
                 break;
+
+            case "C":
+                display = "0";
+                previous = "0";
+                botao = "";
+                break;
         }
+
         // if (this.isNumber(botao)) {
         //     total = total;
         // }
+        previous = display;
 
         this.setState({
-            display: display + botao
+            display: display
         });
     }
 
     render() {
-        const {total} = this.state;
+        const {display} = this.state;
 
         return (
             <div style={{width: 390, fontFamily: "sans-serif", margin: "7% auto", textAlign: "center"}}>
                 <h1>Calculadora</h1>
                 <div style={{padding: 2, border: "1px solid", width: 384}}>
-                    <Display label={total} />
+                    <Display label={display} />
                     <Box callBack={(tecla) => this.processar(tecla)} />
                 </div>
             </div>
